@@ -8,6 +8,7 @@
     </h:head>
     <h:body>
         <h:form id="form" prependId="false">
+            <p:outputLabel value="Envia un archivo desde el controller al microservices"/>
             <p:growl id="growl"></p:growl>
             <p:commandButton value="Send File"
                              action="#{fileController.send()}"
