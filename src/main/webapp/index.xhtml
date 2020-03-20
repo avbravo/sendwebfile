@@ -8,9 +8,29 @@
     </h:head>
     <h:body>
         <h:form id="form" prependId="false">
+            <h1><p:outputLabel value="Sendwebfile"/></h1>
             <p:outputLabel value="Envia un archivo desde el controller al microservices"/>
-            <p:growl id="growl"></p:growl>
-            <p:commandButton value="Send File"
+            <br></br>
+            <p:outputLabel value="Pasos:"/>
+           <br></br>
+            <p:outputLabel value="1.Ejecute serverfiles.jar primero"/>
+            
+            
+              <p:growl id="growl"></p:growl>
+            <p:panelGrid columns="2">
+                
+                <p:outputLabel value="Nota"/>
+                    
+                <p:outputLabel value="Copie los archivos en /fiscalprinter/license"/>
+                <p:outputLabel value="Archivos"/>
+                <p:outputLabel value="license.enc, licenseiv.enc, license.desc"/>
+                
+          
+                        
+            
+            </p:panelGrid>
+          
+        <p:commandButton value="Send File"
                              action="#{fileController.send()}"
                              update=":form"
                              />

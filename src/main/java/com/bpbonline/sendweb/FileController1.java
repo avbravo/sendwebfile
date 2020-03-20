@@ -25,50 +25,11 @@ import javax.ws.rs.core.Response;
  */
 @Named
 @ViewScoped
-public class FileController implements Serializable {
+public class FileController1 implements Serializable {
 
     private String directory = JsfUtil.userHome() + JsfUtil.fileSeparator() + "fiscalprinter" + JsfUtil.fileSeparator() + "license" + JsfUtil.fileSeparator();
 
     public String send() {
-
-        try {
-            //--Files to send 
-          Response response  =sendFileToMicroservices(directory, "license.enc", "http://localhost:8080/serverfiles/resources/file", "upload");
-        Response responseivEnc =   sendFileToMicroservices(directory, "licenseiv.enc", "http://localhost:8080/serverfiles/resources/file", "upload");
-       Response responseDes   =  sendFileToMicroservices(directory, "license.des", "http://localhost:8080/serverfiles/resources/file", "upload");
-           String mensajeExistoso="";
-           String mensajeFallido="";
-            if (response.getStatus() == 200 && responseivEnc.getStatus() == 200 &&  responseDes.getStatus() == 200)  {
-              JsfUtil.infoDialog("Envio existoso"," Se enviaron exitosamente los archivos: licemse.emc, licenseiv.enc, license.des");
-            } else{
-                         if (response.getStatus() == 200){
-                             mensajeExistoso+=" license.enc";
-                         }else{
-                             mensajeFallido=" license.enc";
-                         }
-                         if (responseivEnc.getStatus() == 200){
-                             mensajeExistoso+=" licenseiv.enc";
-                         }else{
-                             mensajeFallido+=" licenseiv.enc";
-                         }
-                         
-                         if (responseDes.getStatus() == 200){
-                             mensajeExistoso+=" license.des";
-                         }else{
-                             mensajeFallido+=" license.desc";
-                         }
-                        JsfUtil.infoDialog("Proceso terminado","Exitosos:"+mensajeExistoso +  "    Fallidps: "+mensajeFallido);     
-                         
-            }
-    
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JsfUtil.errorDialog("send)=", e.getLocalizedMessage());
-        }
-        return "";
-    }
-    public String sendOld() {
 
         try {
             //--Files to send 
@@ -132,27 +93,22 @@ public class FileController implements Serializable {
         }
         return "";
     }
-
-    public Response sendFileToMicroservices(String directory, String filename, String url, String pathResouresMicroservices) {
-        Response response = null;
-        try {
-            File fileToSend = new File(directory + filename);
-            //---InputStream
-            InputStream fileInStream = new FileInputStream(fileToSend);
-            
-             //--contentDisposition
-            String contentDisposition = "attachment; filename=\"" + fileToSend.getName() + "\"";
-
-            Client clientDes = ClientBuilder.newClient();
-            response = clientDes.target(url).path(pathResouresMicroservices).request()
-                    .header("Content-Disposition", contentDisposition)
-                    .post(Entity.entity(fileInStream, MediaType.APPLICATION_OCTET_STREAM));
-
-        } catch (Exception e) {
-
-            JsfUtil.errorDialog("sendFileToMicroservices()", e.getLocalizedMessage());
+    
+    
+    
+    public Response sendFile(String url, String contentDisposition,InputStream fileInStream){
+        Response response= null ;
+            try {
+                  Client clientDes = ClientBuilder.newClient();
+                  response = clientDes.target(url).path("upload").request()
+                            .header("Content-Disposition", contentDisposition)
+                            .post(Entity.entity(fileInStream, MediaType.APPLICATION_OCTET_STREAM));
+           
+            } catch (Exception e) {
+     
+            JsfUtil.errorDialog("sendFile()", e.getLocalizedMessage());
         }
         return response;
-
+    
     }
 }
