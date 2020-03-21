@@ -6,6 +6,7 @@
 package com.bpbonline.sendweb;
 
 import com.avbravo.jmoordbutils.JsfUtil;
+import com.avbravo.jmoordbutils.jaxrs.Microservices;
 import java.io.Serializable;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -25,11 +26,11 @@ public class FileController implements Serializable {
 
         try {
             //--Files to send 
-          Response response  =MicroservicesLocal.sendFileWithJaxRsHeaders(directory, "license.enc", "http://localhost:8080/serverfiles/resources/file", "upload"
+          Response response  =Microservices.sendFileWithJaxRsHeaders(directory, "license.enc", "http://localhost:8080/serverfiles/resources/file", "upload"
                   ,"folder","license");
-        Response responseivEnc =  MicroservicesLocal.sendFileWithJaxRsHeaders(directory, "licenseiv.enc", "http://localhost:8080/serverfiles/resources/file", "upload"
+        Response responseivEnc =  Microservices.sendFileWithJaxRsHeaders(directory, "licenseiv.enc", "http://localhost:8080/serverfiles/resources/file", "upload"
                 ,"folder","license");
-       Response responseDes   =  MicroservicesLocal.sendFileWithJaxRsHeaders(directory, "license.des", "http://localhost:8080/serverfiles/resources/file", "upload"
+       Response responseDes   =  Microservices.sendFileWithJaxRsHeaders(directory, "license.des", "http://localhost:8080/serverfiles/resources/file", "upload"
               ,"folder" ,"license");
                
            String mensajeExistoso="";
