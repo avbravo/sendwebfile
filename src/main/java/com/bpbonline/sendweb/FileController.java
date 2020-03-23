@@ -22,6 +22,8 @@ public class FileController implements Serializable {
 
     private String directory = JsfUtil.userHome() + JsfUtil.fileSeparator() + "fiscalprinter" + JsfUtil.fileSeparator() + "license" + JsfUtil.fileSeparator();
 
+    
+    // <editor-fold defaultstate="collapsed" desc="String send()">
     public String send() {
 
         try {
@@ -65,5 +67,32 @@ public class FileController implements Serializable {
         }
         return "";
     }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="String sendZip()">
+    public String sendZip() {
+
+        try {
+            //--Files to send 
+          Response response  =Microservices.sendFileWithJaxRs(directory, "authorizedlicense.zip", "http://localhost:8080/serverfiles/resources/zip", "upload");
+     
+               
+            System.out.println("response.getStatus() "+response.getStatus());
+            System.out.println("response.getStatusInfo() "+response.getStatusInfo());
+            if (response.getStatus() == 200 )  {
+              JsfUtil.infoDialog("Envio existoso"," Se enviaron exitosamente el archivo authorizedlicense.zip");
+            } else{
+                       
+                       JsfUtil.warningDialog("Envio errado","  No Se envio el archivo authorizedlicense.zip");
+                         
+            }
+    
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JsfUtil.errorDialog("sendZip()", e.getLocalizedMessage());
+        }
+        return "";
+    }
+    // <editor-fold defaultstate="collapsed" desc="method()">
  
 }

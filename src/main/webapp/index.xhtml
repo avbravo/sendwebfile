@@ -12,29 +12,52 @@
             <p:outputLabel value="Envia un archivo desde el controller al microservices"/>
             <br></br>
             <p:outputLabel value="Pasos:"/>
-           <br></br>
+            <br></br>
             <p:outputLabel value="1.Ejecute serverfiles.jar primero"/>
+
+
+            <p:growl id="growl"></p:growl>
+           
             
             
-              <p:growl id="growl"></p:growl>
-            <p:panelGrid columns="2">
-                
+            
+            
+               <p:fieldset legend="ENVIAR ARCHIVOs" style="margin-bottom:20px" toggleable="true" collapsed="true">
+               <p:panelGrid columns="2">
+
                 <p:outputLabel value="Nota"/>
-                    
+
                 <p:outputLabel value="Copie los archivos en /fiscalprinter/license"/>
                 <p:outputLabel value="Archivos"/>
                 <p:outputLabel value="license.enc, licenseiv.enc, license.desc"/>
-                
-          
-                        
-            
+
+
+
+
             </p:panelGrid>
-          
-        <p:commandButton value="Send File"
+
+            <p:commandButton value="Send File"
                              action="#{fileController.send()}"
                              update=":form"
                              />
+            </p:fieldset>
             
+               <p:fieldset legend="ENVIAR .ZIP" style="margin-bottom:20px" toggleable="true" collapsed="true">
+               <p:panelGrid columns="2">
+
+                <p:outputLabel value="Nota"/>
+
+                <p:outputLabel value="Copie el archivo /fiscalprinter/license/authorizedlicense.zip"/>
+              
+            </p:panelGrid>
+
+                   <p:commandButton value="Send Zip"
+                             action="#{fileController.sendZip()}"
+                             update=":form"
+                             />
+            </p:fieldset>
+
+
         </h:form>
     </h:body>
 </html>
