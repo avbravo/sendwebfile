@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.bpbonline</groupId>
     <artifactId>sendwebfiles</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
     <packaging>war</packaging>
     <name>sendwebfile</name>
     
@@ -49,7 +49,7 @@
 <dependency>
             <groupId>com.github.avbravo</groupId>
             <artifactId>jmoordbutils</artifactId>
-            <version>0.70</version>
+            <version>0.72</version>
         </dependency>
 
       
